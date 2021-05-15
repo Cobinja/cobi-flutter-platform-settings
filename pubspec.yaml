@@ -1,0 +1,22 @@
+name: cobi_flutter_platform_settings
+description: An application settings screen for flutter that persists values via the shared_preferences package and uses the flutter_platform_widgets
+version: 1.0.0
+homepage: https://github.com/Cobinja/cobi-flutter-platform-settings
+repository: https://github.com/Cobinja/cobi-flutter-platform-settings
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_platform_widgets: ^1.7.0
+  shared_preferences: ^2.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
