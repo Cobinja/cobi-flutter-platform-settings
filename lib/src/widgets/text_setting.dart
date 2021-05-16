@@ -61,6 +61,7 @@ class PlatformTextSetting<T> extends PlatformSettingsWidgetBase<T> {
     this.scrollPadding,
     this.enableInteractiveSelection,
     this.selectionControls,
+    SettingChangedCallback<T>? onChanged,
   }) : super(
     key: key,
     settingsKey: settingsKey,
@@ -68,7 +69,8 @@ class PlatformTextSetting<T> extends PlatformSettingsWidgetBase<T> {
     defaultValue: defaultValue,
     subtitle: subtitle,
     enabled: enabled,
-    leading: leading
+    leading: leading,
+    onChanged: onChanged
   )
   {
     if (T != String && T != int && T != double) {

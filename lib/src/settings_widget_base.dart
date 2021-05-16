@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+typedef SettingChangedCallback<T> = void Function(T? from, T? to);
+
 abstract class PlatformSettingsWidgetBase<T> extends StatefulWidget {
   
   final T? defaultValue;
@@ -15,7 +17,7 @@ abstract class PlatformSettingsWidgetBase<T> extends StatefulWidget {
   
   final Widget? leading;
   
-  final Function(T? from, T? to)? onChanged;
+  final SettingChangedCallback<T>? onChanged;
   
   PlatformSettingsWidgetBase({
     Key? key,
@@ -78,8 +80,7 @@ abstract class PlatformSettingsWidgetBaseState<T, W extends PlatformSettingsWidg
       return;
     }
     
-    Type type = value.runtimeType;
-    switch (type) {
+    switch (T) {
       case String:
         prefs.setString(settingsKey, value as String);
         break;

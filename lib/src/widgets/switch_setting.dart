@@ -4,9 +4,21 @@ import 'package:flutter/widgets.dart';
 import '../settings_widget_base.dart';
 
 class PlatformSwitchSetting extends PlatformSettingsWidgetBase<bool> {
-  PlatformSwitchSetting(
-    {Key? key, required settingsKey, required title, bool? defaultValue, String? subtitle}
-  ) : super(key: key, settingsKey: settingsKey, title: title, defaultValue: defaultValue, subtitle: subtitle);
+  PlatformSwitchSetting({
+    Key? key,
+    required settingsKey,
+    required title,
+    bool? defaultValue,
+    String? subtitle,
+    SettingChangedCallback<bool>? onChanged,
+  }) : super(
+    key: key,
+    settingsKey: settingsKey,
+    title: title,
+    defaultValue: defaultValue,
+    subtitle: subtitle,
+    onChanged: onChanged,
+  );
 
   @override
   State<StatefulWidget> createState() => _PlatformSwitchSettingState();

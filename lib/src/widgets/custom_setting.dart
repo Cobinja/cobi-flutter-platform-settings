@@ -14,9 +14,9 @@ class PlatformCustomSetting<T> extends PlatformSettingsWidgetBase<T> {
       String? subtitle,
       enabled = true,
       this.onPressed,
-      onChanged,
       Widget? leading,
-      this.trailing
+      this.trailing,
+      SettingChangedCallback<T>? onChanged,
     }) : super(
       key: key,
       settingsKey: settingsKey,
@@ -24,7 +24,8 @@ class PlatformCustomSetting<T> extends PlatformSettingsWidgetBase<T> {
       defaultValue: defaultValue,
       subtitle: subtitle,
       enabled: enabled,
-      leading: leading
+      leading: leading,
+      onChanged: onChanged
   );
 
   @override

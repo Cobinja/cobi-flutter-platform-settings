@@ -18,15 +18,17 @@ class PlatformRadioSetting<T> extends PlatformSettingsWidgetBase<T> {
     String? subtitle,
     Widget? leading,
     this.trailing,
-    bool enabled = true}
-  ) : super(
+    bool enabled = true,
+    SettingChangedCallback<T>? onChanged,
+  }) : super(
     key: key,
     settingsKey: settingsKey,
     title: title,
     defaultValue: defaultValue,
     subtitle: subtitle,
     enabled: enabled,
-    leading: leading
+    leading: leading,
+    onChanged: onChanged,
   );
   
   @override
@@ -70,7 +72,8 @@ class PlatformRadioModalSetting<T> extends PlatformSettingsWidgetBase<T> {
     String? subtitle,
     Widget? leading,
     this.trailing,
-    bool enabled = true
+    bool enabled = true,
+    SettingChangedCallback<T>? onChanged,
   }) : super(
     key: key,
     settingsKey: settingsKey,
@@ -78,7 +81,8 @@ class PlatformRadioModalSetting<T> extends PlatformSettingsWidgetBase<T> {
     defaultValue: defaultValue,
     subtitle: subtitle,
     leading: leading,
-    enabled: enabled
+    enabled: enabled,
+    onChanged: onChanged,
   );
 
   @override

@@ -13,7 +13,8 @@ class PlatformCheckboxSetting extends PlatformSettingsWidgetBase<bool> {
     bool? defaultValue,
     subtitle,
     bool enabled = true,
-    Widget? leading
+    Widget? leading,
+    SettingChangedCallback<bool>? onChanged,
   }) : super(
     key: key,
     settingsKey: settingsKey,
@@ -21,7 +22,8 @@ class PlatformCheckboxSetting extends PlatformSettingsWidgetBase<bool> {
     defaultValue: defaultValue,
     subtitle: subtitle,
     enabled: enabled,
-    leading: leading
+    leading: leading,
+    onChanged: onChanged,
   );
 
   @override

@@ -19,12 +19,14 @@ class PlatformSliderSetting extends PlatformSettingsWidgetBase<double> {
     this.divisions,
     double? defaultValue,
     this.trailing,
+    SettingChangedCallback<double>? onChanged,
   }
   ) : super(
     key: key,
     settingsKey: settingsKey,
     title: title,
     defaultValue: defaultValue,
+    onChanged: onChanged,
   );
 
   @override
