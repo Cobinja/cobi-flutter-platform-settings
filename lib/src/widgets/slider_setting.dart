@@ -4,6 +4,9 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import '../settings_widget_base.dart';
 
+/// A slider setting
+/// 
+/// This widget only uses the data type double, not int
 class PlatformSliderSetting extends PlatformSettingsWidgetBase<double> {
   final Widget? trailing;
   final double minValue;

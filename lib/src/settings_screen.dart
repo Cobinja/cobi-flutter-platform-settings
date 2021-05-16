@@ -3,7 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
+/// The uppermost container for platform settings widgets
+/// 
+/// This can contain multiple [PlatformSettingsGroup]s
+/// and other Widgets derived from [PlatformSettingsWidgetBase]
+/// 
+/// This class is supposed to be used within a PlatformApp from flutter_platform_widgets
 class PlatformSettingsScreen extends PlatformSettingsWidgetBase {
+  
+  /// All children go here
   final List<PlatformSettingsWidgetBase> children;
 
   PlatformSettingsScreen({

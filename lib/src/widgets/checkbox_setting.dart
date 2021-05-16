@@ -5,6 +5,10 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import '../settings_widget_base.dart';
 
+/// A checkbox setting
+/// 
+/// On iOS this widget uses a switch instead of a checkbox
+/// because there are no native checkboxes on iOS
 class PlatformCheckboxSetting extends PlatformSettingsWidgetBase<bool> {
   PlatformCheckboxSetting({
     Key? key,

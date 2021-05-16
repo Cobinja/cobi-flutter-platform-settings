@@ -1,3 +1,6 @@
+/// A flutter package that uses the packages
+/// shared_preferences for persistence and
+/// flutter_platform_widgets for platform integration
 library cobi_flutter_platform_settings;
 
 export 'src/settings_screen.dart';

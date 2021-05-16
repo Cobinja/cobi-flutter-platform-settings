@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../settings_widget_base.dart';
 
+/// A Custom Setting for various purposes
+/// This widget can be used for various stuff,
+/// like calling another navigation route or
+/// showing some information
 class PlatformCustomSetting<T> extends PlatformSettingsWidgetBase<T> {
   final void Function()? onPressed;
   final Widget? trailing;

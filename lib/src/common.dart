@@ -1,3 +1,4 @@
+/// A class for list widget children
 class PlatformListItem<T> {
   T value;
   String caption;

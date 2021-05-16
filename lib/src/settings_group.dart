@@ -5,8 +5,12 @@ import 'settings_screen.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
+/// A group of settings
+/// 
+/// This widget groups various [PlatformSettingsWidgetBase]s together
 class PlatformSettingsGroup extends PlatformSettingsWidgetBase {
   
+  /// All children go here
   final List<PlatformSettingsWidgetBase> children;
   
   PlatformSettingsGroup({

@@ -3,6 +3,9 @@ import 'package:flutter/widgets.dart';
 
 import '../settings_widget_base.dart';
 
+/// A switch setting
+/// 
+/// This widget shows a switch that the user can toggle on and off
 class PlatformSwitchSetting extends PlatformSettingsWidgetBase<bool> {
   PlatformSwitchSetting({
     Key? key,

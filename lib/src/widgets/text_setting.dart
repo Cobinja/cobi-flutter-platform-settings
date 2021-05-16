@@ -5,30 +5,58 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import '../settings_widget_base.dart';
 
+/// A textfield setting
+/// 
+/// When tapped, this widget shows a dialog with a textbox.
 class PlatformTextSetting<T> extends PlatformSettingsWidgetBase<T> {
   
+  /// The hint text for the dialog
   final String? dialogHintText;
+  /// The keyboard type to be used in the dialog
   final TextInputType? keyboardType;
-  final String? obscuringCharacter;
+  /// Whether or not to obscure the text
   final bool? obscureText;
+  /// the character used to obscure the text
+  final String? obscuringCharacter;
+  /// The text for the 'confirm' action in the dialog
   final String okText;
+  /// The text for the 'cancel' action in the dialog
   final String cancelText;
+  /// A list of TextInputFormatter that can be used to restrict or allow certain characters
   final List<TextInputFormatter>? inputFormatters;
+  /// This callback is triggered for validation.
+  /// Useful e.g. to make sure the user only entered numbers in a certain range
   final FormFieldValidator<T>? validator;
+  
+  /// Inherited from PlatformTextFormField
   final bool? autocorrect;
+  /// Inherited from PlatformTextFormField
   final SmartDashesType? smartDashesType;
+  /// Inherited from PlatformTextFormField
   final SmartQuotesType? smartQuotesType;
+  /// Inherited from PlatformTextFormField
   final bool? enableSuggestions;
+  /// Inherited from PlatformTextFormField
   final int? maxLines;
+  /// Inherited from PlatformTextFormField
   final int? minLines;
+  /// Inherited from PlatformTextFormField
   final bool? expands;
+  /// Inherited from PlatformTextFormField
   final int? maxLength;
+  /// Inherited from PlatformTextFormField
   final double cursorWidth = 2.0;
+  /// Inherited from PlatformTextFormField
   final double? cursorHeight;
+  /// Inherited from PlatformTextFormField
   final Color? cursorColor;
+  /// Inherited from PlatformTextFormField
   final Brightness? keyboardAppearance;
+  /// Inherited from PlatformTextFormField
   final EdgeInsets? scrollPadding;
+  /// Inherited from PlatformTextFormField
   final bool? enableInteractiveSelection;
+  /// Inherited from PlatformTextFormField
   final TextSelectionControls? selectionControls;
   
   PlatformTextSetting({

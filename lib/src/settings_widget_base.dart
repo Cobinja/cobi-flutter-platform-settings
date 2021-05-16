@@ -4,19 +4,28 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 typedef SettingChangedCallback<T> = void Function(T? from, T? to);
 
+/// The base class for all platform settings widgets
+/// [T] is the type of value stored via shared_preferences
 abstract class PlatformSettingsWidgetBase<T> extends StatefulWidget {
   
+  /// The default value that is used if no value is stored
   final T? defaultValue;
   
+  /// The key used to store via shared_preferences
   final String? settingsKey;
   
+  /// The settings tile's title
   final String title;
+  /// The settings tile's subtitle
   final String? subtitle;
   
+  /// Whether this setting is enabled or not
   final bool enabled;
   
+  /// The leading widget for the settings tile
   final Widget? leading;
   
+  /// A callback that is triggered when the value changes
   final SettingChangedCallback<T>? onChanged;
   
   PlatformSettingsWidgetBase({
@@ -31,6 +40,9 @@ abstract class PlatformSettingsWidgetBase<T> extends StatefulWidget {
   }) : super(key: key);
 }
 
+/// The base state class for [PlatformSettingsWidgetBase]
+/// 
+/// This takes care of persisting the value via shared_preferences
 abstract class PlatformSettingsWidgetBaseState<T, W extends PlatformSettingsWidgetBase<T>> extends State<W> {
   
   @protected
@@ -68,6 +80,13 @@ abstract class PlatformSettingsWidgetBaseState<T, W extends PlatformSettingsWidg
     });
   }
   
+  /// Here the actual storing takes place
+  /// 
+  /// This method can be overridden by subclasses in cases
+  /// where a subclass needs to store e.g. a data type that
+  /// is not directly suported by shared_preferences.
+  /// An overriding subclass should make sure
+  /// that null values are removed from shared_preferences.
   void persist() {
     if (widget.settingsKey == null) {
       return;
@@ -104,6 +123,9 @@ abstract class PlatformSettingsWidgetBaseState<T, W extends PlatformSettingsWidg
     }
   }
   
+  /// This method is called by subclasses when the value changes.
+  /// Here, the new value is only set and [PlatformSettingsWidgetBase.onChanged] is only called
+  /// when the value actually changes
   @protected
   void onChanged(T? newValue) {
     setState(() {

@@ -4,6 +4,9 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import '../common.dart';
 import '../settings_widget_base.dart';
 
+/// A radiobutton setting
+/// 
+/// This shows mutiple radio buttons of which one can be selected
 class PlatformRadioSetting<T> extends PlatformSettingsWidgetBase<T> {
   final Widget? trailing;
   
@@ -59,6 +62,8 @@ class _PlatformRadioSettingState<T> extends PlatformSettingsWidgetBaseState<T, P
   }
 }
 
+/// Similar to [PlatformRadioSetting] but instead of showing the radio buttons directly,
+/// this opens a dialog and stores the selected value only when the dialog is confirmed
 class PlatformRadioModalSetting<T> extends PlatformSettingsWidgetBase<T> {
   final Widget? trailing;
   
