@@ -3,6 +3,7 @@
 /// flutter_platform_widgets for platform integration
 library cobi_flutter_platform_settings;
 
+export 'src/settings_widget_base.dart';
 export 'src/settings_screen.dart';
 export 'src/settings_group.dart';
 export 'src/widgets/text_setting.dart';
