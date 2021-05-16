@@ -81,18 +81,29 @@ class MyHomePage extends StatelessWidget {
           PlatformSettingsGroup(
             title: 'Text Settings',
             children: [
-              PlatformTextSetting(
+              PlatformTextSetting<String>(
                 settingsKey: 'text-setting',
                 title: 'A text setting with default keyboard type',
               ),
-              PlatformTextSetting(
+              PlatformTextSetting<String>(
                 settingsKey: 'text-setting-2',
                 title: 'This a text setting with a specified subtitle',
                 subtitle: 'This is a subtitle'
               ),
-              PlatformTextSetting(
+              PlatformTextSetting<int>(
                 settingsKey: 'text-setting-3',
-                title: 'A text setting with number keyboard type',
+                title: 'A text setting for integers only',
+                keyboardType: TextInputType.number,
+                defaultValue: 42000,
+                validator: (value) {
+                  if (value == null || value < 1024 || value > 65536) {
+                    return 'Integer number between 1024 and 65536 expected';
+                  }
+                },
+              ),
+              PlatformTextSetting<double>(
+                settingsKey: 'text-setting-4',
+                title: 'A text setting for doubles only',
                 keyboardType: TextInputType.number,
               ),
             ],
@@ -142,9 +153,9 @@ class MyHomePage extends StatelessWidget {
             settingsKey: 'slider-setting',
             title: 'This is a slider setting',
             minValue: 0.0,
-            maxValue: 1000.0,
-            divisions: 1000,
-            defaultValue: 500.0,
+            maxValue: 10.0,
+            divisions: 10,
+            defaultValue: 5.0,
           ),
           PlatformCustomSetting(
             title: 'This is a custom setting',

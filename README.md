@@ -38,11 +38,17 @@ PlatformCustomSetting (
 ### PlatformTextSetting
 A widget that shows a textfield
 ```dart
-PlatformTextSetting(
-  settingsKey:  'text-setting',
-  title: 'This a text setting with a specified subtitle',
-  subtitle: 'This is a subtitle',
-)
+PlatformTextSetting<int>(
+  settingsKey: 'text-setting-3',
+  title: 'A text setting for integers only',
+  keyboardType: TextInputType.number,
+  defaultValue: 42000,
+  validator: (value) {
+    if (value == null || value < 1024 || value > 65536) {
+      return 'Integer number between 1024 and 65536 expected';
+    }
+  },
+),
 ```
 ### PlatformSwitchSetting
 A widget with a two-state switch

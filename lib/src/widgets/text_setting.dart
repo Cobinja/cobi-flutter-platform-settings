@@ -5,14 +5,31 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import '../settings_widget_base.dart';
 
-class PlatformTextSetting extends PlatformSettingsWidgetBase<String> {
+class PlatformTextSetting<T> extends PlatformSettingsWidgetBase<T> {
   
   final String? dialogHintText;
   final TextInputType? keyboardType;
-  final bool? isPasswordField;
+  final String? obscuringCharacter;
+  final bool? obscureText;
   final String okText;
   final String cancelText;
   final List<TextInputFormatter>? inputFormatters;
+  final FormFieldValidator<T>? validator;
+  final bool? autocorrect;
+  final SmartDashesType? smartDashesType;
+  final SmartQuotesType? smartQuotesType;
+  final bool? enableSuggestions;
+  final int? maxLines;
+  final int? minLines;
+  final bool? expands;
+  final int? maxLength;
+  final double cursorWidth = 2.0;
+  final double? cursorHeight;
+  final Color? cursorColor;
+  final Brightness? keyboardAppearance;
+  final EdgeInsets? scrollPadding;
+  final bool? enableInteractiveSelection;
+  final TextSelectionControls? selectionControls;
   
   PlatformTextSetting({
     Key? key,
@@ -24,10 +41,26 @@ class PlatformTextSetting extends PlatformSettingsWidgetBase<String> {
     this.dialogHintText,
     this.keyboardType,
     bool enabled = true,
-    this.isPasswordField,
+    this.obscureText,
+    this.obscuringCharacter,
     this.inputFormatters,
+    this.validator,
     this.okText = 'OK',
-    this.cancelText = 'Cancel'
+    this.cancelText = 'Cancel',
+    this.autocorrect,
+    this.smartDashesType,
+    this.smartQuotesType,
+    this.enableSuggestions,
+    this.maxLines,
+    this.minLines,
+    this.expands,
+    this.maxLength,
+    this.cursorHeight,
+    this.cursorColor,
+    this.keyboardAppearance,
+    this.scrollPadding,
+    this.enableInteractiveSelection,
+    this.selectionControls,
   }) : super(
     key: key,
     settingsKey: settingsKey,
@@ -38,24 +71,29 @@ class PlatformTextSetting extends PlatformSettingsWidgetBase<String> {
     leading: leading
   )
   {
+    if (T != String && T != int && T != double) {
+      throw Exception('PlatformTextSetting only supports String, int and double as generic types');
+    }
+    
     if (subtitle == null) {
       subtitle = defaultValue;
     }
   }
 
   @override
-  State<StatefulWidget> createState() => _PlatformTextSettingState();
+  State<StatefulWidget> createState() => _PlatformTextSettingState<T>();
 }
 
-class _PlatformTextSettingState extends PlatformSettingsWidgetBaseState<String, PlatformTextSetting> {
+class _PlatformTextSettingState<T> extends PlatformSettingsWidgetBaseState<T, PlatformTextSetting<T>> {
   
   String? usedSubtitle;
-   
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  
   @override
   init() {
     super.init();
     if (value != null) {
-      usedSubtitle = value;
+      usedSubtitle = value.toString();
     }
     else {
       usedSubtitle = widget.subtitle ?? '';
@@ -63,31 +101,100 @@ class _PlatformTextSettingState extends PlatformSettingsWidgetBaseState<String, 
   }
   
   @override
-  void onChanged(covariant String newValue) {
-    if (newValue is String?) {
-      setState(() {
-        this.value = newValue;
-        if (value != null && value != '') {
-          usedSubtitle = value;
-        }
-        else if (widget.subtitle != null) {
-          usedSubtitle = widget.subtitle;
-        }
-        else {
-          usedSubtitle = '';
-        }
-        persist();
-      });
-      return;
+  void onChanged(T? newValue) {
+    setState(() {
+      this.value = newValue;
+      if (value != null && value != '') {
+        usedSubtitle = value.toString();
+      }
+      else if (widget.subtitle != null) {
+        usedSubtitle = widget.subtitle;
+      }
+      else {
+        usedSubtitle = '';
+      }
+      persist();
+    });
+  }
+  
+  doChange(String? newValue) {
+    if (newValue == null) {
+      onChanged(newValue as T?);
     }
-    throw TypeError();
+    
+    switch(T) {
+      case String:
+        onChanged(newValue as T?);
+        break;
+      case int:
+        onChanged(int.tryParse(newValue!) as T?);
+        break;
+      case double:
+        onChanged(double.tryParse(newValue!) as T?);
+        break;
+      default:
+        break;
+    }
+  }
+  
+  String? validate(String? val) {
+    if (val == null) {
+      return widget.validator != null ? widget.validator!(val as T?) : null;
+    }
+    
+    switch(T) {
+      case String:
+        return widget.validator != null ? widget.validator!(val as T) : null;
+      case int:
+        int? v = int.tryParse(val);
+        if (v == null)  {
+          return 'Integer value required';
+        }
+        if (widget.validator != null) {
+          return widget.validator!(v as T);
+        }
+        break;
+      case double:
+        double? v = double.tryParse(val);
+        if (v == null)  {
+          return 'Floating point value required';
+        }
+        if (widget.validator != null) {
+          return widget.validator!(v as T);
+        }
+        break;
+      default:
+        return 'General error in text field validation';
+    }
+    return null;
+  }
+  
+  List<TextInputFormatter>? _buildInputFormatters() {
+    List<TextInputFormatter>? result;
+    switch(T) {
+      case int:
+        result = [FilteringTextInputFormatter.digitsOnly];
+        break;
+      case double:
+        result = [FilteringTextInputFormatter.allow(RegExp(r'[0-9\.]'))];
+        break;
+    }
+    
+    if (widget.inputFormatters != null) {
+      if (result == null) {
+        result = [];
+      }
+      result.addAll(widget.inputFormatters!);
+    }
+    
+    return result;
   }
   
   _onTap() async {
-    final String? changedValue = await showPlatformDialog<String>(
+    await showPlatformDialog<String>(
       context: context,
       builder: (_) {
-        var controller = TextEditingController(text: value);
+        var controller = TextEditingController(text: value?.toString());
         return PlatformAlertDialog(
           title: Text(
             widget.title,
@@ -97,11 +204,35 @@ class _PlatformTextSettingState extends PlatformSettingsWidgetBaseState<String, 
               cupertino: (data) => data.textTheme.navTitleTextStyle,
             ),
           ),
-          content: PlatformTextField(
-            controller: controller,
-            autofocus: true,
-            inputFormatters: widget.inputFormatters,
-            keyboardType: widget.keyboardType,
+          content: Form(
+            key: _formKey,
+            child: PlatformTextFormField(
+              hintText: widget.dialogHintText,
+              controller: controller,
+              autofocus: true,
+              inputFormatters: _buildInputFormatters(),
+              keyboardType: widget.keyboardType,
+              validator: validate,
+              onSaved: doChange,
+              textInputAction: TextInputAction.done,
+              obscureText: widget.obscureText,
+              obscuringCharacter: widget.obscuringCharacter,
+              autocorrect: widget.autocorrect,
+              smartDashesType: widget.smartDashesType,
+              smartQuotesType: widget.smartQuotesType,
+              enableSuggestions: widget.enableSuggestions,
+              maxLines: widget.maxLines,
+              minLines: widget.minLines,
+              expands: widget.expands,
+              maxLength: widget.maxLength,
+              cursorHeight: widget.cursorHeight,
+              cursorColor: widget.cursorColor,
+              keyboardAppearance: widget.keyboardAppearance,
+              scrollPadding: widget.scrollPadding,
+              enableInteractiveSelection: widget.enableInteractiveSelection,
+              selectionControls: widget.selectionControls,
+            ),
+            autovalidateMode: AutovalidateMode.always,
           ),
           actions: [
             PlatformDialogAction(
@@ -109,16 +240,18 @@ class _PlatformTextSettingState extends PlatformSettingsWidgetBaseState<String, 
               child: PlatformText(widget.cancelText),
             ),
             PlatformDialogAction(
-              onPressed: () => Navigator.pop(context, controller.text),
+              onPressed: ()  {
+                if (_formKey.currentState!.validate()) {
+                  _formKey.currentState!.save();
+                  Navigator.pop(context);
+                }
+              },
               child: PlatformText(widget.okText),
             )
           ],
         );
       },
     );
-    if (changedValue != null && changedValue != value) {
-      onChanged(changedValue);
-    }
   }
   
   @override
