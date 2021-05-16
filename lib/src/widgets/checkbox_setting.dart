@@ -33,26 +33,25 @@ class _PlatformCheckboxSettingState extends PlatformSettingsWidgetBaseState<bool
   @override
   Widget build(BuildContext context) {
     // TODO migrate to platform list tile when https://github.com/stryder-dev/flutter_platform_widgets/issues/296 is done
-    
-    switch (platform(context)) {
-      case PlatformTarget.android:
-        return CheckboxListTile(
-          value: value != null ? value! : false,
-          title: Text(widget.title),
-          subtitle: widget.subtitle != null ? Text(widget.subtitle!) : null,
-          onChanged: onChanged,
-        );
+    if (platform(context) == PlatformTarget.iOS) {
       // No native checboxes on iOS, so just use a switch
-      case PlatformTarget.iOS:
-        return SwitchListTile.adaptive(
-          value: value != null ? value! : false,
-          title: Text(widget.title),
-          subtitle: widget.subtitle != null ? Text(widget.subtitle!) : null,
-          onChanged: onChanged,
-        );
-      default:
-        throw 'Platform not supported';
+      return SwitchListTile.adaptive(
+        value: value != null ? value! : false,
+        title: Text(widget.title),
+        subtitle: widget.subtitle != null ? Text(widget.subtitle!) : null,
+        onChanged: onChanged,
+      );
     }
+    if (isMaterial(context) || isCupertino(context))
+    return CheckboxListTile(
+      value: value != null ? value! : false,
+      title: Text(widget.title),
+      subtitle: widget.subtitle != null ? Text(widget.subtitle!) : null,
+      onChanged: onChanged,
+    );
+    
+    return throw new UnsupportedError(
+        'This platform is not supported: $defaultTargetPlatform');
   }
   
 }
