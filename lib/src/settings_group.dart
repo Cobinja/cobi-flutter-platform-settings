@@ -2,7 +2,6 @@ import 'package:cobi_flutter_platform_settings/src/settings_widget_base.dart';
 import 'package:flutter/material.dart';
 
 import 'settings_screen.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// A group of settings
