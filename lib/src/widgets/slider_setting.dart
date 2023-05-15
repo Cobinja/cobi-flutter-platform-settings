@@ -56,7 +56,7 @@ class _PlatformSwitchSettingState extends PlatformSettingsWidgetBaseState<double
     
     // TODO migrate to platform list tile when https://github.com/stryder-dev/flutter_platform_widgets/issues/296 is done
     
-    return ListTile(
+    return PlatformListTile(
       leading: widget.leading,
       trailing: widget.trailing,
       title: Text(widget.title),

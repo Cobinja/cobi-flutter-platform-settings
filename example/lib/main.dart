@@ -14,16 +14,12 @@ class MyApp extends StatelessWidget {
     
     final materialTheme = ThemeData(
       cupertinoOverrideTheme: CupertinoThemeData(
-        primaryColor: Color(0xff127EFB),
+        primaryColor: Colors.indigo,
       ),
-      primarySwatch: Colors.indigo,
-      accentColor: Colors.blue,
-      outlinedButtonTheme: OutlinedButtonThemeData(
-        style: ButtonStyle(
-          padding: MaterialStateProperty.all(EdgeInsets.all(16.0)),
-          foregroundColor: MaterialStateProperty.all(Color(0xFF3DDC84)),
-        ),
-      ),
+      colorScheme: ColorScheme.fromSwatch(
+        primarySwatch: Colors.indigo,
+        accentColor: Colors.indigoAccent
+      )
     );
 
     return Theme(

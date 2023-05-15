@@ -31,7 +31,7 @@ dependencies:
   
   cobi_flutter_platform_settings:
     path: '../'
-  flutter_platform_widgets: ^1.7.1
+  flutter_platform_widgets: ^3.1.0
 
 dev_dependencies:
   flutter_test:
