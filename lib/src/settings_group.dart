@@ -11,11 +11,13 @@ class PlatformSettingsGroup extends PlatformSettingsWidgetBase {
   
   /// All children go here
   final List<PlatformSettingsWidgetBase> children;
+  final TextStyle? style;
   
   PlatformSettingsGroup({
     Key? key,
     required String title,
     required this.children,
+    this.style
   }) : super(key: key, title: title);
 
   @override
@@ -57,9 +59,9 @@ class _PlatformSettingsGroupState extends PlatformSettingsWidgetBaseState<dynami
             widget.title,
             textAlign: TextAlign.left,
             overflow: TextOverflow.fade,
-            style: platformThemeData(
+            style: widget.style ?? platformThemeData(
               context,
-              material: (data) => data.textTheme.bodyText1!.copyWith(color: data.accentColor),
+              material: (data) => TextStyle(color: data.colorScheme.secondary),
               cupertino: (data) => data.textTheme.navTitleTextStyle,
             ),
           ),

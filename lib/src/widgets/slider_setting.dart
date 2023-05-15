@@ -69,7 +69,7 @@ class _PlatformSwitchSettingState extends PlatformSettingsWidgetBaseState<double
           onChanged(sliderValue);
         },
         onChanged: (val) => setState(() => (sliderValue = val)),
-        activeColor: Theme.of(context).accentColor,
+        activeColor: Theme.of(context).colorScheme.secondary,
       )
     );
   }
