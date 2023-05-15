@@ -30,7 +30,6 @@ class _PlatformSwitchSettingState extends PlatformSettingsWidgetBaseState<bool, 
   
   @override
   Widget build(BuildContext context) {
-    // TODO migrate to platform list tile when https://github.com/stryder-dev/flutter_platform_widgets/issues/296 is done
     
     return SwitchListTile.adaptive(
       value: value != null ? value! : false,

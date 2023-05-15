@@ -54,8 +54,6 @@ class _PlatformSwitchSettingState extends PlatformSettingsWidgetBaseState<double
       sliderValue = value ?? widget.defaultValue ?? 0.0;
     }
     
-    // TODO migrate to platform list tile when https://github.com/stryder-dev/flutter_platform_widgets/issues/296 is done
-    
     return PlatformListTile(
       leading: widget.leading,
       trailing: widget.trailing,

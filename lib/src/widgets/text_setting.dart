@@ -285,14 +285,16 @@ class _PlatformTextSettingState<T> extends PlatformSettingsWidgetBaseState<T, Pl
   
   @override
   Widget build(BuildContext context) {
-    // TODO migrate to platform list tile when https://github.com/stryder-dev/flutter_platform_widgets/issues/296 is done
-    
-    return ListTile(
+    return PlatformListTile(
       title: Text(widget.title),
       subtitle: usedSubtitle != null ? Text(usedSubtitle!) : Text(''),
       leading: widget.leading,
       onTap: _onTap,
-      enabled: widget.enabled,
+      material: (context, platform) {
+        return MaterialListTileData(
+          enabled: widget.enabled
+        );
+      },
     );
   }
 

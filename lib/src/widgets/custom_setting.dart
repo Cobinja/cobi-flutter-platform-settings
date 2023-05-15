@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import '../settings_widget_base.dart';
 
@@ -41,9 +42,8 @@ class PlatformCustomSetting<T> extends PlatformSettingsWidgetBase<T> {
 class _PlatformCustomSettingState<T> extends PlatformSettingsWidgetBaseState<T, PlatformCustomSetting<T>> {
   @override
   Widget build(BuildContext context) {
-    // TODO migrate to platform list tile when https://github.com/stryder-dev/flutter_platform_widgets/issues/296 is done
     
-    return ListTile(
+    return PlatformListTile(
       leading: widget.leading,
       trailing: widget.trailing,
       title: Text(widget.title),

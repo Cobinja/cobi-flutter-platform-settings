@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import '../settings_widget_base.dart';
@@ -38,7 +37,6 @@ class _PlatformCheckboxSettingState extends PlatformSettingsWidgetBaseState<bool
   
   @override
   Widget build(BuildContext context) {
-    // TODO migrate to platform list tile when https://github.com/stryder-dev/flutter_platform_widgets/issues/296 is done
     if (platform(context) == PlatformTarget.iOS) {
       // No native checboxes on iOS, so just use a switch
       return SwitchListTile.adaptive(
