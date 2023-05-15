@@ -32,10 +32,15 @@ dependencies:
   cobi_flutter_platform_settings:
     path: '../'
   flutter_platform_widgets: ^3.1.0
+  
+  json_annotation: ^4.7.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  
+  json_serializable: ^6.5.4
+  build_runner: ^2.3.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

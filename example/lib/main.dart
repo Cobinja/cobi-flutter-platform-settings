@@ -1,4 +1,5 @@
 import 'package:cobi_flutter_platform_settings/cobi_flutter_platform_settings.dart';
+import 'package:cobi_flutter_platform_settings_example/types.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -153,6 +154,10 @@ class MyHomePage extends StatelessWidget {
             maxValue: 10.0,
             divisions: 10,
             defaultValue: 5.0,
+          ),
+          TestTypeSetting(
+            title: "This is a settign with a custom type",
+            settingsKey: "test-type-setting",
           ),
           PlatformCustomSetting(
             title: 'This is a custom setting',
