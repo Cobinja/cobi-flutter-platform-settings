@@ -229,7 +229,7 @@ class _PlatformTextSettingState<T> extends PlatformSettingsWidgetBaseState<T, Pl
             widget.title,
             style: platformThemeData(
               context,
-              material: (data) => data.textTheme.caption,
+              material: (data) => data.textTheme.bodySmall,
               cupertino: (data) => data.textTheme.navTitleTextStyle,
             ),
           ),
