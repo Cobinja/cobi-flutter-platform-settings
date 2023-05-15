@@ -115,4 +115,7 @@ PlatformSliderSetting(
 ```
 #### You can find more example use cases in the included example app.
 ## Extensibility
-You can define your own widgets by subclassing ``PlatformSettingsWidgetBase<T>`` and ``PlatformSettingsWidgetBaseState<T, YourSettingsWidgetClass>`` with ``T`` being the type stored via shared_preferences. If you need a data type *not* supplied by shared_preferences, you can override ``PlatformSettingsWidgetBaseState::persist()`` and do the serialization yourself.
+You can define your own widgets by subclassing ``SettingsWidgetBase<T>`` and ``SettingsWidgetBaseState<T, YourSettingsWidgetClass>`` with ``T`` being the type stored via shared_preferences.
+
+If you need a data type *not* supplied by shared_preferences, you can override ``SettingsWidgetBaseState::serialize()`` and ``SettingsWidgetBaseState::deserialize()`` and do the serialization yourself.
+#### Note: Serialization and deserialization work different in 3.0 compared to version 2.0. See the included example.
