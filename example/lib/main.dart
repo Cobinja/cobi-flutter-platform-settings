@@ -95,6 +95,7 @@ class MyHomePage extends StatelessWidget {
                   if (value == null || value < 1024 || value > 65536) {
                     return 'Integer number between 1024 and 65536 expected';
                   }
+                  return null;
                 },
               ),
               PlatformTextSetting<double>(
